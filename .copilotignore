@@ -1,0 +1,4 @@
+*.log
+*.json
+/prompt_tools/*.txt
+/gs-gqa/*

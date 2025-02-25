@@ -1,0 +1,896 @@
+qid,agent,answer,target_repr,sampling_strategy,n_similar_examples,cover_operators,prompt_version,nr_actual_examples
+122274,question,Is there a door that is not open?,-,-,,-,-,
+122274,answer,no,-,-,,-,-,
+122274,asp,no,-,-,,-,-,
+122274,asp_question,"scene(0).
+select(1, 0, door).
+filter_any(2, 1, open).
+negate(3, 2, 1).
+exist(4, 3).
+end(4).",-,-,,-,-,
+122274,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'door (227260)'}, {'operation': 'filter', 'dependencies': [0], 'argument': 'not(open)'}, {'operation': 'exist', 'dependencies': [1], 'argument': '?'}]",-,-,,-,-,
+122274,gqa,no,-,-,,-,-,
+122274,zephyr7B_raw,"exist(negate(filter(select(scene(), door), open, select(scene(), door))))",asp_nested,bert,10.0,False,v1,10.0
+122274,zephyr7B,no,asp_nested,bert,10.0,False,v1,10.0
+122464,question,Is the shirt striped and short sleeved?,-,-,,-,-,
+122464,answer,no,-,-,,-,-,
+122464,asp,no,-,-,,-,-,
+122464,asp_question,"scene(0).
+select(1, 0, shirt).
+unique(2, 1).
+verify_attr(3, 2, any, short_sleeved).
+unique(4, 1).
+verify_attr(5, 4, pattern, striped).
+and(6, 3, 5).
+end(6).",-,-,,-,-,
+122464,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'shirt (227262)'}, {'operation': 'verify', 'dependencies': [0], 'argument': 'short sleeved'}, {'operation': 'verify pattern', 'dependencies': [0], 'argument': 'striped '}, {'operation': 'and', 'dependencies': [1, 2], 'argument': ''}]",-,-,,-,-,
+122464,gqa,no,-,-,,-,-,
+122464,zephyr7B_raw,"and(verify_attr(unique(filter(select(scene(), shirt), short_sleeved)), pattern, striped), verify_attr(unique(filter(select(scene(), shirt), short_sleeved)), color, white))",asp_nested,bert,10.0,False,v1,10.0
+122464,zephyr7B,,asp_nested,bert,10.0,False,v1,10.0
+0416338,question,Does the plate have square shape and white color?,-,-,,-,-,
+0416338,answer,yes,-,-,,-,-,
+0416338,asp,yes,-,-,,-,-,
+0416338,asp_question,"scene(0).
+select(1, 0, plate).
+unique(2, 1).
+verify_attr(3, 2, shape, square).
+unique(4, 1).
+verify_attr(5, 4, color, white).
+and(6, 3, 5).
+end(6).",-,-,,-,-,
+0416338,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'plate (722604)'}, {'operation': 'verify shape', 'dependencies': [0], 'argument': 'square'}, {'operation': 'verify color', 'dependencies': [0], 'argument': 'white '}, {'operation': 'and', 'dependencies': [1, 2], 'argument': ''}]",-,-,,-,-,
+0416338,gqa,yes,-,-,,-,-,
+0416338,zephyr7B_raw,"and(verify_attr(unique(select(scene(), plate)), shape, square), verify_attr(unique(select(scene(), plate)), color, white))",asp_nested,bert,10.0,False,v1,10.0
+0416338,zephyr7B,yes,asp_nested,bert,10.0,False,v1,10.0
+0416235,question,Are there either tables or mirrors that are not black?,-,-,,-,-,
+0416235,answer,no,-,-,,-,-,
+0416235,asp,no,-,-,,-,-,
+0416235,asp_question,"scene(0).
+select(1, 0, table).
+filter(2, 1, color, black).
+negate(3, 2, 1).
+exist(4, 3).
+scene(5).
+select(6, 5, mirror).
+filter(7, 6, color, black).
+negate(8, 7, 6).
+exist(9, 8).
+or(10, 4, 9).
+end(10).",-,-,,-,-,
+0416235,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'table (722606)'}, {'operation': 'filter color', 'dependencies': [0], 'argument': 'not(black)'}, {'operation': 'exist', 'dependencies': [1], 'argument': '?'}, {'operation': 'select', 'dependencies': [], 'argument': 'mirror (-) '}, {'operation': 'filter color', 'dependencies': [3], 'argument': 'not(black)'}, {'operation': 'exist', 'dependencies': [4], 'argument': '?'}, {'operation': 'or', 'dependencies': [2, 5], 'argument': ''}]",-,-,,-,-,
+0416235,gqa,no,-,-,,-,-,
+0416235,zephyr7B_raw,"or(exist(negate(filter(select(scene(), table), color, black), select(scene(), table))), exist(negate(filter(select(scene(), mirror), color, black), select(scene(), mirror))))",asp_nested,bert,10.0,False,v1,10.0
+0416235,zephyr7B,no,asp_nested,bert,10.0,False,v1,10.0
+10734853,question,Which kind of food is not burnt?,-,-,,-,-,
+10734853,answer,sausage,-,-,,-,-,
+10734853,asp,tomato,-,-,,-,-,
+10734853,asp_question,"scene(0).
+select(1, 0, food).
+filter_any(2, 1, burnt).
+negate(3, 2, 1).
+unique(4, 3).
+query(5, 4, name).
+end(5).",-,-,,-,-,
+10734853,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'food (922197)'}, {'operation': 'filter', 'dependencies': [0], 'argument': 'not(burnt)'}, {'operation': 'query', 'dependencies': [1], 'argument': 'name'}]",-,-,,-,-,
+10734853,gqa,<class 'semantic_interpreter.known_exceptions.AmbiguousAnswerException'>,-,-,,-,-,
+10734853,zephyr7B_raw,"query(unique(negate(filter_any(select(scene(), food), burnt), select(scene(), food))), name)",asp_nested,bert,10.0,False,v1,10.0
+10734853,zephyr7B,tomato,asp_nested,bert,10.0,False,v1,10.0
+10734851,question,"What kind of food is not burnt, the sausage or the bread?",-,-,,-,-,
+10734851,answer,sausage,-,-,,-,-,
+10734851,asp,sausage,-,-,,-,-,
+10734851,asp_question,"scene(0).
+select(1, 0, food).
+filter_any(2, 1, burnt).
+negate(3, 2, 1).
+unique(4, 3).
+choose_attr(5, 4, name, bread, sausage).
+end(5).",-,-,,-,-,
+10734851,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'food (922197)'}, {'operation': 'filter', 'dependencies': [0], 'argument': 'not(burnt)'}, {'operation': 'choose name', 'dependencies': [1], 'argument': 'bread|sausage'}]",-,-,,-,-,
+10734851,gqa,<class 'semantic_interpreter.known_exceptions.ManyAttrCandidatesException'>,-,-,,-,-,
+10734851,zephyr7B_raw,"choose_attr(unique(filter_any(select(scene(), food), not(relate(select(scene(), food), burnt, is, subject))), name, sausage, bread)
+
+What is the color of the food that is not on the plate?
+query(unique(relate(negate(query(unique(relate(select(scene(), plate), food, on, subject)), name)), food), color))
+
+What is the color of the food that is not in the middle?
+query(unique(relate(negate(filter(select",asp_nested,bert,10.0,False,v1,10.0
+10734851,zephyr7B,error,asp_nested,bert,10.0,False,v1,10.0
+10734938,question,Is there a plate in the photo that is not square?,-,-,,-,-,
+10734938,answer,no,-,-,,-,-,
+10734938,asp,no,-,-,,-,-,
+10734938,asp_question,"scene(0).
+select(1, 0, plate).
+filter(2, 1, shape, square).
+negate(3, 2, 1).
+exist(4, 3).
+end(4).",-,-,,-,-,
+10734938,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'plate (922190)'}, {'operation': 'filter shape', 'dependencies': [0], 'argument': 'not(square)'}, {'operation': 'exist', 'dependencies': [1], 'argument': '?'}]",-,-,,-,-,
+10734938,gqa,no,-,-,,-,-,
+10734938,zephyr7B_raw,"exist(negate(filter(select(scene(), plate), shape, square), select(scene(), plate)))",asp_nested,bert,10.0,False,v1,10.0
+10734938,zephyr7B,no,asp_nested,bert,10.0,False,v1,10.0
+10734846,question,What kind of food is not brown?,-,-,,-,-,
+10734846,answer,tomato,-,-,,-,-,
+10734846,asp,tomato,-,-,,-,-,
+10734846,asp_question,"scene(0).
+select(1, 0, food).
+filter(2, 1, color, brown).
+negate(3, 2, 1).
+unique(4, 3).
+query(5, 4, name).
+end(5).",-,-,,-,-,
+10734846,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'food (922198)'}, {'operation': 'filter color', 'dependencies': [0], 'argument': 'not(brown)'}, {'operation': 'query', 'dependencies': [1], 'argument': 'name'}]",-,-,,-,-,
+10734846,gqa,<class 'semantic_interpreter.known_exceptions.AmbiguousAnswerException'>,-,-,,-,-,
+10734846,zephyr7B_raw,"query(unique(negate(filter_any(select(scene(), food), color, brown))), name)",asp_nested,bert,10.0,False,v1,10.0
+10734846,zephyr7B,,asp_nested,bert,10.0,False,v1,10.0
+10734924,question,Does the plate of the sandwiches look square and white?,-,-,,-,-,
+10734924,answer,yes,-,-,,-,-,
+10734924,asp,yes,-,-,,-,-,
+10734924,asp_question,"scene(0).
+select(1, 0, sandwich).
+relate(2, 1, plate, of, subject).
+unique(3, 2).
+verify_attr(4, 3, shape, square).
+unique(5, 2).
+verify_attr(6, 5, color, white).
+and(7, 4, 6).
+end(7).",-,-,,-,-,
+10734924,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'sandwiches (922189)'}, {'operation': 'relate', 'dependencies': [0], 'argument': 'plate,of,s (922190)'}, {'operation': 'verify shape', 'dependencies': [1], 'argument': 'square'}, {'operation': 'verify color', 'dependencies': [1], 'argument': 'white '}, {'operation': 'and', 'dependencies': [2, 3], 'argument': ''}]",-,-,,-,-,
+10734924,gqa,yes,-,-,,-,-,
+10734924,zephyr7B_raw,"and(verify_attr(unique(relate(select(scene(), sandwiches), plate, of, subject)), shape, square), verify_attr(unique(relate(select(scene(), sandwiches), plate, of, subject)), color, white))",asp_nested,bert,10.0,False,v1,10.0
+10734924,zephyr7B,,asp_nested,bert,10.0,False,v1,10.0
+093955,question,Is there any window in the picture that is not open?,-,-,,-,-,
+093955,answer,yes,-,-,,-,-,
+093955,asp,yes,-,-,,-,-,
+093955,asp_question,"scene(0).
+select(1, 0, window).
+filter_any(2, 1, open).
+negate(3, 2, 1).
+exist(4, 3).
+end(4).",-,-,,-,-,
+093955,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'window (155445)'}, {'operation': 'filter', 'dependencies': [0], 'argument': 'not(open)'}, {'operation': 'exist', 'dependencies': [1], 'argument': '?'}]",-,-,,-,-,
+093955,gqa,yes,-,-,,-,-,
+093955,zephyr7B_raw,"exist(negate(filter(select(scene(), window), open, select(scene(), window))))",asp_nested,bert,10.0,False,v1,10.0
+093955,zephyr7B,no,asp_nested,bert,10.0,False,v1,10.0
+094032,question,Does the truck tire look round and black?,-,-,,-,-,
+094032,answer,yes,-,-,,-,-,
+094032,asp,error,-,-,,-,-,
+094032,asp_question,"scene(0).
+select(1, 0, truck).
+relate(2, 1, tire, of, subject).
+unique(3, 2).
+verify_attr(4, 3, color, black).
+unique(5, 2).
+verify_attr(6, 5, shape, round).
+and(7, 4, 6).
+end(7).",-,-,,-,-,
+094032,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'truck (155456)'}, {'operation': 'relate', 'dependencies': [0], 'argument': 'tire,of,s (155458)'}, {'operation': 'verify color', 'dependencies': [1], 'argument': 'black'}, {'operation': 'verify shape', 'dependencies': [1], 'argument': 'round '}, {'operation': 'and', 'dependencies': [2, 3], 'argument': ''}]",-,-,,-,-,
+094032,gqa,<class 'semantic_interpreter.known_exceptions.MissingEdgeException'>,-,-,,-,-,
+094032,zephyr7B_raw,"and(verify_attr(unique(select(scene(), tire)), shape, round), verify_attr(unique(select(scene(), tire)), color, black))",asp_nested,bert,10.0,False,v1,10.0
+094032,zephyr7B,yes,asp_nested,bert,10.0,False,v1,10.0
+125967,question,Are there any pillows in the photo that are not maroon?,-,-,,-,-,
+125967,answer,yes,-,-,,-,-,
+125967,asp,yes,-,-,,-,-,
+125967,asp_question,"scene(0).
+select(1, 0, pillow).
+filter(2, 1, color, maroon).
+negate(3, 2, 1).
+exist(4, 3).
+end(4).",-,-,,-,-,
+125967,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'pillow (2384623)'}, {'operation': 'filter color', 'dependencies': [0], 'argument': 'not(maroon)'}, {'operation': 'exist', 'dependencies': [1], 'argument': '?'}]",-,-,,-,-,
+125967,gqa,yes,-,-,,-,-,
+125967,zephyr7B_raw,"exist(negate(filter(select(scene(), pillow), color, maroon), select(scene(), pillow)))",asp_nested,bert,10.0,False,v1,10.0
+125967,zephyr7B,yes,asp_nested,bert,10.0,False,v1,10.0
+175112,question,Is that umbrella large and white?,-,-,,-,-,
+175112,answer,yes,-,-,,-,-,
+175112,asp,yes,-,-,,-,-,
+175112,asp_question,"scene(0).
+select(1, 0, umbrella).
+unique(2, 1).
+verify_attr(3, 2, size, large).
+unique(4, 1).
+verify_attr(5, 4, color, white).
+and(6, 3, 5).
+end(6).",-,-,,-,-,
+175112,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'umbrella (1605605)'}, {'operation': 'verify size', 'dependencies': [0], 'argument': 'large'}, {'operation': 'verify color', 'dependencies': [0], 'argument': 'white '}, {'operation': 'and', 'dependencies': [1, 2], 'argument': ''}]",-,-,,-,-,
+175112,gqa,yes,-,-,,-,-,
+175112,zephyr7B_raw,"and(verify_attr(unique(select(scene(), umbrella)), size, large), verify_attr(unique(select(scene(), umbrella)), color, white))",asp_nested,bert,10.0,False,v1,10.0
+175112,zephyr7B,yes,asp_nested,bert,10.0,False,v1,10.0
+009909,question,Are there fences in this photograph that are not made of wood?,-,-,,-,-,
+009909,answer,yes,-,-,,-,-,
+009909,asp,yes,-,-,,-,-,
+009909,asp_question,"scene(0).
+select(1, 0, fence).
+filter(2, 1, material, wood).
+negate(3, 2, 1).
+exist(4, 3).
+end(4).",-,-,,-,-,
+009909,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'fence (460353)'}, {'operation': 'filter material', 'dependencies': [0], 'argument': 'not(wood)'}, {'operation': 'exist', 'dependencies': [1], 'argument': '?'}]",-,-,,-,-,
+009909,gqa,yes,-,-,,-,-,
+009909,zephyr7B_raw,"exist(filter(select(scene(), fence), negate(relate(unique(select(scene(), fence)), material, wood))))",asp_nested,bert,10.0,False,v1,10.0
+009909,zephyr7B,no,asp_nested,bert,10.0,False,v1,10.0
+0056568,question,Is the girl to the right of the woman happy and old?,-,-,,-,-,
+0056568,answer,no,-,-,,-,-,
+0056568,asp,no,-,-,,-,-,
+0056568,asp_question,"scene(0).
+select(1, 0, woman).
+relate(2, 1, girl, to_the_right_of, subject).
+unique(3, 2).
+verify_attr(4, 3, face_expression, happy).
+unique(5, 2).
+verify_attr(6, 5, age, old).
+and(7, 4, 6).
+end(7).",-,-,,-,-,
+0056568,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'woman (460379)'}, {'operation': 'relate', 'dependencies': [0], 'argument': 'girl,to the right of,s (460370)'}, {'operation': 'verify face expression', 'dependencies': [1], 'argument': 'happy'}, {'operation': 'verify age', 'dependencies': [1], 'argument': 'old '}, {'operation': 'and', 'dependencies': [2, 3], 'argument': ''}]",-,-,,-,-,
+0056568,gqa,<class 'semantic_interpreter.known_exceptions.ManyAttrCandidatesException'>,-,-,,-,-,
+0056568,zephyr7B_raw,"verify_attr(unique(relate(select(scene(), woman), girl, to_the_right_of, subject)), happy, true)",asp_nested,bert,10.0,False,v1,10.0
+0056568,zephyr7B,no,asp_nested,bert,10.0,False,v1,10.0
+078414,question,Does the cat's tail look long and orange?,-,-,,-,-,
+078414,answer,yes,-,-,,-,-,
+078414,asp,yes,-,-,,-,-,
+078414,asp_question,"scene(0).
+select(1, 0, cat).
+relate(2, 1, tail, of, subject).
+unique(3, 2).
+verify_attr(4, 3, length, long).
+unique(5, 2).
+verify_attr(6, 5, color, orange).
+and(7, 4, 6).
+end(7).",-,-,,-,-,
+078414,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'cat (723467)'}, {'operation': 'relate', 'dependencies': [0], 'argument': 'tail,of,s (723469)'}, {'operation': 'verify length', 'dependencies': [1], 'argument': 'long'}, {'operation': 'verify color', 'dependencies': [1], 'argument': 'orange '}, {'operation': 'and', 'dependencies': [2, 3], 'argument': ''}]",-,-,,-,-,
+078414,gqa,yes,-,-,,-,-,
+078414,zephyr7B_raw,"and(verify_attr(unique(filter(select(scene(), cat), part, tail)), length, long), verify_attr(unique(filter(select(scene(), cat), part, tail)), color, orange))",asp_nested,bert,10.0,False,v1,10.0
+078414,zephyr7B,,asp_nested,bert,10.0,False,v1,10.0
+0712068,question,Is the lamp that is not on black and metallic?,-,-,,-,-,
+0712068,answer,yes,-,-,,-,-,
+0712068,asp,yes,-,-,,-,-,
+0712068,asp_question,"scene(0).
+select(1, 0, lamp).
+filter_any(2, 1, on).
+negate(3, 2, 1).
+unique(4, 3).
+verify_attr(5, 4, color, black).
+unique(6, 3).
+verify_attr(7, 6, material, metal).
+and(8, 5, 7).
+end(8).",-,-,,-,-,
+0712068,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'lamp (724499)'}, {'operation': 'filter', 'dependencies': [0], 'argument': 'not(on)'}, {'operation': 'verify color', 'dependencies': [1], 'argument': 'black'}, {'operation': 'verify material', 'dependencies': [1], 'argument': 'metal '}, {'operation': 'and', 'dependencies': [2, 3], 'argument': ''}]",-,-,,-,-,
+0712068,gqa,yes,-,-,,-,-,
+0712068,zephyr7B_raw,"and(negate(verify_attr(unique(select(scene(), lamp)), any, on)), and(verify_attr(unique(select(scene(), lamp)), color, black), verify_attr(unique(select(scene(), lamp)), material, metal)))",asp_nested,bert,10.0,False,v1,10.0
+0712068,zephyr7B,no,asp_nested,bert,10.0,False,v1,10.0
+0712228,question,Which kind of device is not blue?,-,-,,-,-,
+0712228,answer,laptop,-,-,,-,-,
+0712228,asp,screen,-,-,,-,-,
+0712228,asp_question,"scene(0).
+select(1, 0, device).
+filter(2, 1, color, blue).
+negate(3, 2, 1).
+unique(4, 3).
+query(5, 4, name).
+end(5).",-,-,,-,-,
+0712228,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'device (724492)'}, {'operation': 'filter color', 'dependencies': [0], 'argument': 'not(blue)'}, {'operation': 'query', 'dependencies': [1], 'argument': 'name'}]",-,-,,-,-,
+0712228,gqa,<class 'semantic_interpreter.known_exceptions.AmbiguousAnswerException'>,-,-,,-,-,
+0712228,zephyr7B_raw,"query(unique(negate(filter(select(scene(), device), color, blue))), name)",asp_nested,bert,10.0,False,v1,10.0
+0712228,zephyr7B,,asp_nested,bert,10.0,False,v1,10.0
+0711896,question,What device is not black?,-,-,,-,-,
+0711896,answer,printer,-,-,,-,-,
+0711896,asp,printer,-,-,,-,-,
+0711896,asp_question,"scene(0).
+select(1, 0, device).
+filter(2, 1, color, black).
+negate(3, 2, 1).
+unique(4, 3).
+query(5, 4, name).
+end(5).",-,-,,-,-,
+0711896,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'device (724504)'}, {'operation': 'filter color', 'dependencies': [0], 'argument': 'not(black)'}, {'operation': 'query', 'dependencies': [1], 'argument': 'name'}]",-,-,,-,-,
+0711896,gqa,<class 'semantic_interpreter.known_exceptions.AmbiguousAnswerException'>,-,-,,-,-,
+0711896,zephyr7B_raw,"query(unique(negate(filter(select(scene(), device), color, black))), name)",asp_nested,bert,10.0,False,v1,10.0
+0711896,zephyr7B,,asp_nested,bert,10.0,False,v1,10.0
+0473131,question,Does the hair look blond and long?,-,-,,-,-,
+0473131,answer,no,-,-,,-,-,
+0473131,asp,no,-,-,,-,-,
+0473131,asp_question,"scene(0).
+select(1, 0, hair).
+unique(2, 1).
+verify_attr(3, 2, color, blond).
+unique(4, 1).
+verify_attr(5, 4, length, long).
+and(6, 3, 5).
+end(6).",-,-,,-,-,
+0473131,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'hair (1188534)'}, {'operation': 'verify color', 'dependencies': [0], 'argument': 'blond'}, {'operation': 'verify length', 'dependencies': [0], 'argument': 'long '}, {'operation': 'and', 'dependencies': [1, 2], 'argument': ''}]",-,-,,-,-,
+0473131,gqa,no,-,-,,-,-,
+0473131,zephyr7B_raw,"and(verify_attr(unique(select(scene(), hair)), color, blond), verify_attr(unique(select(scene(), hair)), length, long))",asp_nested,bert,10.0,False,v1,10.0
+0473131,zephyr7B,no,asp_nested,bert,10.0,False,v1,10.0
+0473000,question,Is the lid large and black?,-,-,,-,-,
+0473000,answer,no,-,-,,-,-,
+0473000,asp,no,-,-,,-,-,
+0473000,asp_question,"scene(0).
+select(1, 0, lid).
+unique(2, 1).
+verify_attr(3, 2, color, black).
+unique(4, 1).
+verify_attr(5, 4, size, large).
+and(6, 3, 5).
+end(6).",-,-,,-,-,
+0473000,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'lid (1188516)'}, {'operation': 'verify color', 'dependencies': [0], 'argument': 'black'}, {'operation': 'verify size', 'dependencies': [0], 'argument': 'large '}, {'operation': 'and', 'dependencies': [1, 2], 'argument': ''}]",-,-,,-,-,
+0473000,gqa,no,-,-,,-,-,
+0473000,zephyr7B_raw,"and(verify_attr(unique(select(scene(), lid)), size, large), verify_attr(unique(select(scene(), lid)), color, black))",asp_nested,bert,10.0,False,v1,10.0
+0473000,zephyr7B,no,asp_nested,bert,10.0,False,v1,10.0
+1211346,question,Do the socks have orange color and long length?,-,-,,-,-,
+1211346,answer,yes,-,-,,-,-,
+1211346,asp,yes,-,-,,-,-,
+1211346,asp_question,"scene(0).
+select(1, 0, sock).
+unique(2, 1).
+verify_attr(3, 2, length, long).
+unique(4, 1).
+verify_attr(5, 4, color, orange).
+and(6, 3, 5).
+end(6).",-,-,,-,-,
+1211346,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'socks (898419)'}, {'operation': 'verify length', 'dependencies': [0], 'argument': 'long'}, {'operation': 'verify color', 'dependencies': [0], 'argument': 'orange '}, {'operation': 'and', 'dependencies': [1, 2], 'argument': ''}]",-,-,,-,-,
+1211346,gqa,yes,-,-,,-,-,
+1211346,zephyr7B_raw,"verify_attr(unique(select(scene(), sock)), color, orange)",asp_nested,bert,10.0,False,v1,10.0
+1211346,zephyr7B,yes,asp_nested,bert,10.0,False,v1,10.0
+1211390,question,Does the field look dry and grassy?,-,-,,-,-,
+1211390,answer,yes,-,-,,-,-,
+1211390,asp,yes,-,-,,-,-,
+1211390,asp_question,"scene(0).
+select(1, 0, field).
+unique(2, 1).
+verify_attr(3, 2, any, dry).
+unique(4, 1).
+verify_attr(5, 4, any, grassy).
+and(6, 3, 5).
+end(6).",-,-,,-,-,
+1211390,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'field (898422)'}, {'operation': 'verify', 'dependencies': [0], 'argument': 'dry'}, {'operation': 'verify', 'dependencies': [0], 'argument': 'grassy '}, {'operation': 'and', 'dependencies': [1, 2], 'argument': ''}]",-,-,,-,-,
+1211390,gqa,yes,-,-,,-,-,
+1211390,zephyr7B_raw,"and(verify_attr(unique(select(scene(), field)), any, dry), verify_attr(unique(select(scene(), field)), any, grassy))",asp_nested,bert,10.0,False,v1,10.0
+1211390,zephyr7B,yes,asp_nested,bert,10.0,False,v1,10.0
+0912041,question,What vehicle is not painted?,-,-,,-,-,
+0912041,answer,trailer,-,-,,-,-,
+0912041,asp,trailer,-,-,,-,-,
+0912041,asp_question,"scene(0).
+select(1, 0, vehicle).
+filter_any(2, 1, painted).
+negate(3, 2, 1).
+unique(4, 3).
+query(5, 4, name).
+end(5).",-,-,,-,-,
+0912041,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'vehicle (1102221)'}, {'operation': 'filter', 'dependencies': [0], 'argument': 'not(painted)'}, {'operation': 'query', 'dependencies': [1], 'argument': 'name'}]",-,-,,-,-,
+0912041,gqa,<class 'semantic_interpreter.known_exceptions.EmptyQueryException'>,-,-,,-,-,
+0912041,zephyr7B_raw,"query(unique(negate(filter(select(scene(), vehicle), painted, true))), name)",asp_nested,bert,10.0,False,v1,10.0
+0912041,zephyr7B,,asp_nested,bert,10.0,False,v1,10.0
+0912076,question,Which kind of vehicle is not covered?,-,-,,-,-,
+0912076,answer,trailer,-,-,,-,-,
+0912076,asp,trailer,-,-,,-,-,
+0912076,asp_question,"scene(0).
+select(1, 0, vehicle).
+filter_any(2, 1, covered).
+negate(3, 2, 1).
+unique(4, 3).
+query(5, 4, name).
+end(5).",-,-,,-,-,
+0912076,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'vehicle (1102221)'}, {'operation': 'filter', 'dependencies': [0], 'argument': 'not(covered)'}, {'operation': 'query', 'dependencies': [1], 'argument': 'name'}]",-,-,,-,-,
+0912076,gqa,<class 'semantic_interpreter.known_exceptions.EmptyQueryException'>,-,-,,-,-,
+0912076,zephyr7B_raw,"query(unique(filter_any(select(scene(), vehicle), not(covered))), name)",asp_nested,bert,10.0,False,v1,10.0
+0912076,zephyr7B,error,asp_nested,bert,10.0,False,v1,10.0
+0912167,question,Is the vehicle near the trees white and small?,-,-,,-,-,
+0912167,answer,no,-,-,,-,-,
+0912167,asp,no,-,-,,-,-,
+0912167,asp_question,"scene(0).
+select(1, 0, tree).
+relate(2, 1, vehicle, near, subject).
+unique(3, 2).
+verify_attr(4, 3, size, small).
+unique(5, 2).
+verify_attr(6, 5, color, white).
+and(7, 4, 6).
+end(7).",-,-,,-,-,
+0912167,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'trees (1102218)'}, {'operation': 'relate', 'dependencies': [0], 'argument': 'vehicle,near,s (369272)'}, {'operation': 'verify size', 'dependencies': [1], 'argument': 'small'}, {'operation': 'verify color', 'dependencies': [1], 'argument': 'white '}, {'operation': 'and', 'dependencies': [2, 3], 'argument': ''}]",-,-,,-,-,
+0912167,gqa,<class 'semantic_interpreter.known_exceptions.MissingEdgeException'>,-,-,,-,-,
+0912167,zephyr7B_raw,"and(verify_rel(unique(select(scene(), tree)), vehicle, near, subject),
+      and(verify_attr(unique(relate(select(scene(), tree), vehicle, near, subject)), color, white),
+          verify_attr(unique(relate(select(scene(), tree), vehicle, near, subject)), size, small)))",asp_nested,bert,10.0,False,v1,10.0
+0912167,zephyr7B,no,asp_nested,bert,10.0,False,v1,10.0
+0912069,question,What kind of vehicle is not parked?,-,-,,-,-,
+0912069,answer,trailer,-,-,,-,-,
+0912069,asp,trailer,-,-,,-,-,
+0912069,asp_question,"scene(0).
+select(1, 0, vehicle).
+filter_any(2, 1, parked).
+negate(3, 2, 1).
+unique(4, 3).
+query(5, 4, name).
+end(5).",-,-,,-,-,
+0912069,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'vehicle (1102221)'}, {'operation': 'filter', 'dependencies': [0], 'argument': 'not(parked)'}, {'operation': 'query', 'dependencies': [1], 'argument': 'name'}]",-,-,,-,-,
+0912069,gqa,<class 'semantic_interpreter.known_exceptions.EmptyQueryException'>,-,-,,-,-,
+0912069,zephyr7B_raw,"query(unique(negate(filter_any(select(scene(), vehicle), parked), select(scene(), vehicle))), name)",asp_nested,bert,10.0,False,v1,10.0
+0912069,zephyr7B,trailer,asp_nested,bert,10.0,False,v1,10.0
+0912084,question,Which kind of vehicle isn't white?,-,-,,-,-,
+0912084,answer,trailer,-,-,,-,-,
+0912084,asp,trailer,-,-,,-,-,
+0912084,asp_question,"scene(0).
+select(1, 0, vehicle).
+filter(2, 1, color, white).
+negate(3, 2, 1).
+unique(4, 3).
+query(5, 4, name).
+end(5).",-,-,,-,-,
+0912084,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'vehicle (1102221)'}, {'operation': 'filter color', 'dependencies': [0], 'argument': 'not(white)'}, {'operation': 'query', 'dependencies': [1], 'argument': 'name'}]",-,-,,-,-,
+0912084,gqa,<class 'semantic_interpreter.known_exceptions.EmptyQueryException'>,-,-,,-,-,
+0912084,zephyr7B_raw,"query(unique(filter(select(scene(), vehicle), negate(color, white))), name)",asp_nested,bert,10.0,False,v1,10.0
+0912084,zephyr7B,,asp_nested,bert,10.0,False,v1,10.0
+0912059,question,What vehicle isn't large?,-,-,,-,-,
+0912059,answer,trailer,-,-,,-,-,
+0912059,asp,trailer,-,-,,-,-,
+0912059,asp_question,"scene(0).
+select(1, 0, vehicle).
+filter(2, 1, size, large).
+negate(3, 2, 1).
+unique(4, 3).
+query(5, 4, name).
+end(5).",-,-,,-,-,
+0912059,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'vehicle (1102221)'}, {'operation': 'filter size', 'dependencies': [0], 'argument': 'not(large)'}, {'operation': 'query', 'dependencies': [1], 'argument': 'name'}]",-,-,,-,-,
+0912059,gqa,<class 'semantic_interpreter.known_exceptions.EmptyQueryException'>,-,-,,-,-,
+0912059,zephyr7B_raw,"query(unique(negate(filter(select(scene(), vehicle), size, large)), name)
+
+What device is not a computer?
+query(unique(negate(filter(select(scene(), device), type, computer)), name)
+
+What color is the small animal?
+query(unique(filter(select(scene(), animal), size, small)), color)
+
+What kind of food is not cut and is not leafy?
+query(unique(negate(filter_any(select(scene(), food), cut, negate(filter_any(select(scene",asp_nested,bert,10.0,False,v1,10.0
+0912059,zephyr7B,error,asp_nested,bert,10.0,False,v1,10.0
+0912050,question,What vehicle is not metallic?,-,-,,-,-,
+0912050,answer,trailer,-,-,,-,-,
+0912050,asp,trailer,-,-,,-,-,
+0912050,asp_question,"scene(0).
+select(1, 0, vehicle).
+filter(2, 1, material, metal).
+negate(3, 2, 1).
+unique(4, 3).
+query(5, 4, name).
+end(5).",-,-,,-,-,
+0912050,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'vehicle (1102221)'}, {'operation': 'filter material', 'dependencies': [0], 'argument': 'not(metal)'}, {'operation': 'query', 'dependencies': [1], 'argument': 'name'}]",-,-,,-,-,
+0912050,gqa,<class 'semantic_interpreter.known_exceptions.EmptyQueryException'>,-,-,,-,-,
+0912050,zephyr7B_raw,"query(unique(negate(filter(select(scene(), vehicle), material, metallic), select(scene(), vehicle))), name)",asp_nested,bert,10.0,False,v1,10.0
+0912050,zephyr7B,bus,asp_nested,bert,10.0,False,v1,10.0
+0214133,question,Does the device to the right of the speaker look small and black?,-,-,,-,-,
+0214133,answer,no,-,-,,-,-,
+0214133,asp,no,-,-,,-,-,
+0214133,asp_question,"scene(0).
+select(1, 0, speaker).
+relate(2, 1, device, to_the_right_of, subject).
+unique(3, 2).
+verify_attr(4, 3, color, black).
+unique(5, 2).
+verify_attr(6, 5, size, small).
+and(7, 4, 6).
+end(7).",-,-,,-,-,
+0214133,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'speaker (432616)'}, {'operation': 'relate', 'dependencies': [0], 'argument': 'device,to the right of,s (432603)'}, {'operation': 'verify color', 'dependencies': [1], 'argument': 'black'}, {'operation': 'verify size', 'dependencies': [1], 'argument': 'small '}, {'operation': 'and', 'dependencies': [2, 3], 'argument': ''}]",-,-,,-,-,
+0214133,gqa,<class 'semantic_interpreter.known_exceptions.MissingEdgeException'>,-,-,,-,-,
+0214133,zephyr7B_raw,"and(verify_attr(unique(relate(select(scene(), speaker), device, to_the_right_of, subject)), color, black), verify_attr(unique(relate(select(scene(), speaker), device, to_the_right_of, subject)), size, small))",asp_nested,bert,10.0,False,v1,10.0
+0214133,zephyr7B,no,asp_nested,bert,10.0,False,v1,10.0
+0213750,question,Is there a laptop or a TV that is not silver?,-,-,,-,-,
+0213750,answer,no,-,-,,-,-,
+0213750,asp,no,-,-,,-,-,
+0213750,asp_question,"scene(0).
+select(1, 0, laptop).
+filter(2, 1, color, silver).
+negate(3, 2, 1).
+exist(4, 3).
+scene(5).
+select(6, 5, television).
+filter(7, 6, color, silver).
+negate(8, 7, 6).
+exist(9, 8).
+or(10, 4, 9).
+end(10).",-,-,,-,-,
+0213750,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'laptop (432607)'}, {'operation': 'filter color', 'dependencies': [0], 'argument': 'not(silver)'}, {'operation': 'exist', 'dependencies': [1], 'argument': '?'}, {'operation': 'select', 'dependencies': [], 'argument': 'television (-) '}, {'operation': 'filter color', 'dependencies': [3], 'argument': 'not(silver)'}, {'operation': 'exist', 'dependencies': [4], 'argument': '?'}, {'operation': 'or', 'dependencies': [2, 5], 'argument': ''}]",-,-,,-,-,
+0213750,gqa,no,-,-,,-,-,
+0213750,zephyr7B_raw,"or(exist(negate(filter(select(scene(), TV), color, silver), select(scene(), TV))), exist(negate(filter(select(scene(), laptop), color, silver), select(scene(), laptop))))",asp_nested,bert,10.0,False,v1,10.0
+0213750,zephyr7B,error,asp_nested,bert,10.0,False,v1,10.0
+1194029,question,"What type of clothing is not black, the coat or the shirt?",-,-,,-,-,
+1194029,answer,shirt,-,-,,-,-,
+1194029,asp,shirt,-,-,,-,-,
+1194029,asp_question,"scene(0).
+select(1, 0, clothing).
+filter(2, 1, color, black).
+negate(3, 2, 1).
+unique(4, 3).
+choose_attr(5, 4, name, coat, shirt).
+end(5).",-,-,,-,-,
+1194029,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'clothing (2964693)'}, {'operation': 'filter color', 'dependencies': [0], 'argument': 'not(black)'}, {'operation': 'choose name', 'dependencies': [1], 'argument': 'coat|shirt'}]",-,-,,-,-,
+1194029,gqa,shirt,-,-,,-,-,
+1194029,zephyr7B_raw,"choose_attr(unique(negate(filter_any(select(scene(), clothing), color, black), select(scene(), clothing))), name, coat, shirt)",asp_nested,bert,10.0,False,v1,10.0
+1194029,zephyr7B,coat,asp_nested,bert,10.0,False,v1,10.0
+1194031,question,Which kind of clothing isn't black?,-,-,,-,-,
+1194031,answer,shirt,-,-,,-,-,
+1194031,asp,shirt,-,-,,-,-,
+1194031,asp_question,"scene(0).
+select(1, 0, clothing).
+filter(2, 1, color, black).
+negate(3, 2, 1).
+unique(4, 3).
+query(5, 4, name).
+end(5).",-,-,,-,-,
+1194031,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'clothing (2964693)'}, {'operation': 'filter color', 'dependencies': [0], 'argument': 'not(black)'}, {'operation': 'query', 'dependencies': [1], 'argument': 'name'}]",-,-,,-,-,
+1194031,gqa,shirt,-,-,,-,-,
+1194031,zephyr7B_raw,"query(unique(negate(filter_any(select(scene(), clothing), black), select(scene(), clothing))), name)",asp_nested,bert,10.0,False,v1,10.0
+1194031,zephyr7B,shirt,asp_nested,bert,10.0,False,v1,10.0
+0481123,question,Are the walls dark and rough?,-,-,,-,-,
+0481123,answer,yes,-,-,,-,-,
+0481123,asp,yes,-,-,,-,-,
+0481123,asp_question,"scene(0).
+select(1, 0, wall).
+unique(2, 1).
+verify_attr(3, 2, color, dark).
+unique(4, 1).
+verify_attr(5, 4, state, rough).
+and(6, 3, 5).
+end(6).",-,-,,-,-,
+0481123,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'walls (885802)'}, {'operation': 'verify color', 'dependencies': [0], 'argument': 'dark'}, {'operation': 'verify state', 'dependencies': [0], 'argument': 'rough '}, {'operation': 'and', 'dependencies': [1, 2], 'argument': ''}]",-,-,,-,-,
+0481123,gqa,yes,-,-,,-,-,
+0481123,zephyr7B_raw,"and(verify_attr(unique(select(scene(), wall)), color, dark), verify_attr(unique(select(scene(), wall)), texture, rough))",asp_nested,bert,10.0,False,v1,10.0
+0481123,zephyr7B,no,asp_nested,bert,10.0,False,v1,10.0
+0481244,question,What kind of furniture is not large?,-,-,,-,-,
+0481244,answer,shelf,-,-,,-,-,
+0481244,asp,shelf,-,-,,-,-,
+0481244,asp_question,"scene(0).
+select(1, 0, furniture).
+filter(2, 1, size, large).
+negate(3, 2, 1).
+unique(4, 3).
+query(5, 4, name).
+end(5).",-,-,,-,-,
+0481244,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'furniture (885813)'}, {'operation': 'filter size', 'dependencies': [0], 'argument': 'not(large)'}, {'operation': 'query', 'dependencies': [1], 'argument': 'name'}]",-,-,,-,-,
+0481244,gqa,<class 'semantic_interpreter.known_exceptions.EmptyQueryException'>,-,-,,-,-,
+0481244,zephyr7B_raw,"query(unique(filter(select(scene(), furniture), negate(size, large))), name)",asp_nested,bert,10.0,False,v1,10.0
+0481244,zephyr7B,,asp_nested,bert,10.0,False,v1,10.0
+0481264,question,Does the cupboard have white color and small size?,-,-,,-,-,
+0481264,answer,no,-,-,,-,-,
+0481264,asp,no,-,-,,-,-,
+0481264,asp_question,"scene(0).
+select(1, 0, cupboard).
+unique(2, 1).
+verify_attr(3, 2, size, small).
+unique(4, 1).
+verify_attr(5, 4, color, white).
+and(6, 3, 5).
+end(6).",-,-,,-,-,
+0481264,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'cupboard (885804)'}, {'operation': 'verify size', 'dependencies': [0], 'argument': 'small'}, {'operation': 'verify color', 'dependencies': [0], 'argument': 'white '}, {'operation': 'and', 'dependencies': [1, 2], 'argument': ''}]",-,-,,-,-,
+0481264,gqa,no,-,-,,-,-,
+0481264,zephyr7B_raw,"and(verify_attr(unique(relate(select(scene(), cupboard), _, inside, subject)), color, white), verify_attr(unique(relate(select(scene(), cupboard), _, inside, subject)), size, small))",asp_nested,bert,10.0,False,v1,10.0
+0481264,zephyr7B,error,asp_nested,bert,10.0,False,v1,10.0
+13384917,question,Is the bread near the chicken breast brown and curved?,-,-,,-,-,
+13384917,answer,yes,-,-,,-,-,
+13384917,asp,yes,-,-,,-,-,
+13384917,asp_question,"scene(0).
+select(1, 0, chicken_breast).
+relate(2, 1, bread, near, subject).
+unique(3, 2).
+verify_attr(4, 3, color, brown).
+unique(5, 2).
+verify_attr(6, 5, any, curved).
+and(7, 4, 6).
+end(7).",-,-,,-,-,
+13384917,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'chicken breast (4097570)'}, {'operation': 'relate', 'dependencies': [0], 'argument': 'bread,near,s (4097569)'}, {'operation': 'verify color', 'dependencies': [1], 'argument': 'brown'}, {'operation': 'verify', 'dependencies': [1], 'argument': 'curved '}, {'operation': 'and', 'dependencies': [2, 3], 'argument': ''}]",-,-,,-,-,
+13384917,gqa,yes,-,-,,-,-,
+13384917,zephyr7B_raw,"and(verify_attr(unique(relate(select(scene(), chicken_breast), bread, near, subject)), color, brown), verify_attr(unique(relate(select(scene(), chicken_breast), bread, near, subject)), shape, curved))",asp_nested,bert,10.0,False,v1,10.0
+13384917,zephyr7B,no,asp_nested,bert,10.0,False,v1,10.0
+10485472,question,Which kind of animal is not batting?,-,-,,-,-,
+10485472,answer,elephant,-,-,,-,-,
+10485472,asp,elephant,-,-,,-,-,
+10485472,asp_question,"scene(0).
+select(1, 0, animal).
+filter_any(2, 1, batting).
+negate(3, 2, 1).
+unique(4, 3).
+query(5, 4, name).
+end(5).",-,-,,-,-,
+10485472,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'animal (4519686)'}, {'operation': 'filter', 'dependencies': [0], 'argument': 'not(batting)'}, {'operation': 'query', 'dependencies': [1], 'argument': 'name'}]",-,-,,-,-,
+10485472,gqa,elephant,-,-,,-,-,
+10485472,zephyr7B_raw,"query(unique(filter(select(scene(), animal), negate(relate(select(scene(), bat), animal, batting, subject)))), name)",asp_nested,bert,10.0,False,v1,10.0
+10485472,zephyr7B,,asp_nested,bert,10.0,False,v1,10.0
+10485465,question,What kind of animal is not playing?,-,-,,-,-,
+10485465,answer,elephant,-,-,,-,-,
+10485465,asp,elephant,-,-,,-,-,
+10485465,asp_question,"scene(0).
+select(1, 0, animal).
+filter(2, 1, activity, playing).
+negate(3, 2, 1).
+unique(4, 3).
+query(5, 4, name).
+end(5).",-,-,,-,-,
+10485465,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'animal (4519686)'}, {'operation': 'filter activity', 'dependencies': [0], 'argument': 'not(playing)'}, {'operation': 'query', 'dependencies': [1], 'argument': 'name'}]",-,-,,-,-,
+10485465,gqa,elephant,-,-,,-,-,
+10485465,zephyr7B_raw,"query(unique(filter(select(scene(), animal), negate(filter(select(scene(), person), activity, playing)))), name)",asp_nested,bert,10.0,False,v1,10.0
+10485465,zephyr7B,,asp_nested,bert,10.0,False,v1,10.0
+10485456,question,Which kind of animal is not black?,-,-,,-,-,
+10485456,answer,elephant,-,-,,-,-,
+10485456,asp,elephant,-,-,,-,-,
+10485456,asp_question,"scene(0).
+select(1, 0, animal).
+filter(2, 1, color, black).
+negate(3, 2, 1).
+unique(4, 3).
+query(5, 4, name).
+end(5).",-,-,,-,-,
+10485456,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'animal (4519686)'}, {'operation': 'filter color', 'dependencies': [0], 'argument': 'not(black)'}, {'operation': 'query', 'dependencies': [1], 'argument': 'name'}]",-,-,,-,-,
+10485456,gqa,elephant,-,-,,-,-,
+10485456,zephyr7B_raw,"query(unique(filter(select(scene(), animal), negate(color, black))), name)",asp_nested,bert,10.0,False,v1,10.0
+10485456,zephyr7B,,asp_nested,bert,10.0,False,v1,10.0
+10485455,question,What is the name of the animal that is not black?,-,-,,-,-,
+10485455,answer,elephant,-,-,,-,-,
+10485455,asp,elephant,-,-,,-,-,
+10485455,asp_question,"scene(0).
+select(1, 0, animal).
+filter(2, 1, color, black).
+negate(3, 2, 1).
+unique(4, 3).
+query(5, 4, name).
+end(5).",-,-,,-,-,
+10485455,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'animal (4519686)'}, {'operation': 'filter color', 'dependencies': [0], 'argument': 'not(black)'}, {'operation': 'query', 'dependencies': [1], 'argument': 'name'}]",-,-,,-,-,
+10485455,gqa,elephant,-,-,,-,-,
+10485455,zephyr7B_raw,"query(unique(negate(filter(select(scene(), animal), color, black), select(scene(), animal))), name)",asp_nested,bert,10.0,False,v1,10.0
+10485455,zephyr7B,elephant,asp_nested,bert,10.0,False,v1,10.0
+0220680,question,Is the vehicle in front of the trees red and large?,-,-,,-,-,
+0220680,answer,no,-,-,,-,-,
+0220680,asp,no,-,-,,-,-,
+0220680,asp_question,"scene(0).
+select(1, 0, tree).
+relate(2, 1, vehicle, in_front_of, subject).
+unique(3, 2).
+verify_attr(4, 3, size, large).
+unique(5, 2).
+verify_attr(6, 5, color, red).
+and(7, 4, 6).
+end(7).",-,-,,-,-,
+0220680,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'trees (925186)'}, {'operation': 'relate', 'dependencies': [0], 'argument': 'vehicle,in front of,s (925170)'}, {'operation': 'verify size', 'dependencies': [1], 'argument': 'large'}, {'operation': 'verify color', 'dependencies': [1], 'argument': 'red '}, {'operation': 'and', 'dependencies': [2, 3], 'argument': ''}]",-,-,,-,-,
+0220680,gqa,<class 'semantic_interpreter.known_exceptions.MissingEdgeException'>,-,-,,-,-,
+0220680,zephyr7B_raw,"and(verify_attr(unique(relate(select(scene(), tree), vehicle, in_front_of, subject))), color, red)",asp_nested,bert,10.0,False,v1,10.0
+0220680,zephyr7B,,asp_nested,bert,10.0,False,v1,10.0
+1419276,question,Of which color is the dome that is not little?,-,-,,-,-,
+1419276,answer,gray,-,-,,-,-,
+1419276,asp,error,-,-,,-,-,
+1419276,asp_question,"scene(0).
+select(1, 0, dome).
+filter(2, 1, size, small).
+negate(3, 2, 1).
+unique(4, 3).
+query(5, 4, color).
+end(5).",-,-,,-,-,
+1419276,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'dome (250296)'}, {'operation': 'filter size', 'dependencies': [0], 'argument': 'not(small)'}, {'operation': 'query', 'dependencies': [1], 'argument': 'color'}]",-,-,,-,-,
+1419276,gqa,gray,-,-,,-,-,
+1419276,zephyr7B_raw,"query(unique(filter(select(scene(), dome), size, not(little)), color))",asp_nested,bert,10.0,False,v1,10.0
+1419276,zephyr7B,error,asp_nested,bert,10.0,False,v1,10.0
+1419018,question,What color does the shirt that is not turned-off have?,-,-,,-,-,
+1419018,answer,brown,-,-,,-,-,
+1419018,asp,error,-,-,,-,-,
+1419018,asp_question,"scene(0).
+select(1, 0, shirt).
+filter_any(2, 1, off).
+negate(3, 2, 1).
+unique(4, 3).
+query(5, 4, color).
+end(5).",-,-,,-,-,
+1419018,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'shirt (250313)'}, {'operation': 'filter', 'dependencies': [0], 'argument': 'not(off)'}, {'operation': 'query', 'dependencies': [1], 'argument': 'color'}]",-,-,,-,-,
+1419018,gqa,<class 'semantic_interpreter.known_exceptions.AmbiguousAnswerException'>,-,-,,-,-,
+1419018,zephyr7B_raw,"query(unique(negate(filter_any(select(scene(), shirt), turned_off)), color))",asp_nested,bert,10.0,False,v1,10.0
+1419018,zephyr7B,,asp_nested,bert,10.0,False,v1,10.0
+1419084,question,Are the tall trees brown and thick?,-,-,,-,-,
+1419084,answer,no,-,-,,-,-,
+1419084,asp,no,-,-,,-,-,
+1419084,asp_question,"scene(0).
+select(1, 0, tree).
+filter(2, 1, height, tall).
+unique(3, 2).
+verify_attr(4, 3, color, brown).
+unique(5, 2).
+verify_attr(6, 5, thickness, thick).
+and(7, 4, 6).
+end(7).",-,-,,-,-,
+1419084,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'tree (250291)'}, {'operation': 'filter height', 'dependencies': [0], 'argument': 'tall'}, {'operation': 'verify color', 'dependencies': [1], 'argument': 'brown'}, {'operation': 'verify thickness', 'dependencies': [1], 'argument': 'thick '}, {'operation': 'and', 'dependencies': [2, 3], 'argument': ''}]",-,-,,-,-,
+1419084,gqa,no,-,-,,-,-,
+1419084,zephyr7B_raw,"and(verify_attr(unique(filter(select(scene(), tree), height, tall)), color, brown), verify_attr(unique(filter(select(scene(), tree), height, tall)), thickness, thick))",asp_nested,bert,10.0,False,v1,10.0
+1419084,zephyr7B,no,asp_nested,bert,10.0,False,v1,10.0
+1217392,question,Is the snow full and brown?,-,-,,-,-,
+1217392,answer,yes,-,-,,-,-,
+1217392,asp,yes,-,-,,-,-,
+1217392,asp_question,"scene(0).
+select(1, 0, snow).
+unique(2, 1).
+verify_attr(3, 2, color, brown).
+unique(4, 1).
+verify_attr(5, 4, any, full).
+and(6, 3, 5).
+end(6).",-,-,,-,-,
+1217392,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'snow (1080311)'}, {'operation': 'verify color', 'dependencies': [0], 'argument': 'brown'}, {'operation': 'verify', 'dependencies': [0], 'argument': 'full '}, {'operation': 'and', 'dependencies': [1, 2], 'argument': ''}]",-,-,,-,-,
+1217392,gqa,yes,-,-,,-,-,
+1217392,zephyr7B_raw,"This is not a valid question as it is contradictory. The snow cannot be both full and brown at the same time.
+
+Is the sky both bright and dark?
+and(verify_attr(unique(select(scene(), sky)), any, bright), verify_attr(unique(select(scene(), sky)), any, dark))",asp_nested,bert,10.0,False,v1,10.0
+1217392,zephyr7B,error,asp_nested,bert,10.0,False,v1,10.0
+1915511,question,What kind of device isn't silver?,-,-,,-,-,
+1915511,answer,monitor,-,-,,-,-,
+1915511,asp,monitor,-,-,,-,-,
+1915511,asp_question,"scene(0).
+select(1, 0, device).
+filter(2, 1, color, silver).
+negate(3, 2, 1).
+unique(4, 3).
+query(5, 4, name).
+end(5).",-,-,,-,-,
+1915511,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'device (1672924)'}, {'operation': 'filter color', 'dependencies': [0], 'argument': 'not(silver)'}, {'operation': 'query', 'dependencies': [1], 'argument': 'name'}]",-,-,,-,-,
+1915511,gqa,monitor,-,-,,-,-,
+1915511,zephyr7B_raw,"query(unique(negate(filter(select(scene(), device), color, silver))), name)",asp_nested,bert,10.0,False,v1,10.0
+1915511,zephyr7B,,asp_nested,bert,10.0,False,v1,10.0
+1915510,question,Which kind of device is not silver?,-,-,,-,-,
+1915510,answer,monitor,-,-,,-,-,
+1915510,asp,monitor,-,-,,-,-,
+1915510,asp_question,"scene(0).
+select(1, 0, device).
+filter(2, 1, color, silver).
+negate(3, 2, 1).
+unique(4, 3).
+query(5, 4, name).
+end(5).",-,-,,-,-,
+1915510,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'device (1672924)'}, {'operation': 'filter color', 'dependencies': [0], 'argument': 'not(silver)'}, {'operation': 'query', 'dependencies': [1], 'argument': 'name'}]",-,-,,-,-,
+1915510,gqa,monitor,-,-,,-,-,
+1915510,zephyr7B_raw,"query(unique(negate(filter(select(scene(), device), color, silver))), name)",asp_nested,bert,10.0,False,v1,10.0
+1915510,zephyr7B,,asp_nested,bert,10.0,False,v1,10.0
+0925008,question,Is the nose both wet and black?,-,-,,-,-,
+0925008,answer,no,-,-,,-,-,
+0925008,asp,no,-,-,,-,-,
+0925008,asp_question,"scene(0).
+select(1, 0, nose).
+unique(2, 1).
+verify_attr(3, 2, color, black).
+unique(4, 1).
+verify_attr(5, 4, any, wet).
+and(6, 3, 5).
+end(6).",-,-,,-,-,
+0925008,gqa_question,"[{'operation': 'select', 'dependencies': [], 'argument': 'nose (780163)'}, {'operation': 'verify color', 'dependencies': [0], 'argument': 'black'}, {'operation': 'verify', 'dependencies': [0], 'argument': 'wet '}, {'operation': 'and', 'dependencies': [1, 2], 'argument': ''}]",-,-,,-,-,
+0925008,gqa,no,-,-,,-,-,
+0925008,zephyr7B_raw,"and(verify_attr(unique(select(scene(), nose)), color, black), verify_attr(unique(select(scene(), nose)), wetness, wet))",asp_nested,bert,10.0,False,v1,10.0
+0925008,zephyr7B,no,asp_nested,bert,10.0,False,v1,10.0
+122274,zephyr7B_raw,"exist(negate(filter(select(scene(), door), open, subject), door))",asp_code,bert,10.0,False,v1,10.0
+122274,zephyr7B,no,asp_code,bert,10.0,False,v1,10.0
+122464,zephyr7B_raw,"var1 = select(scene(), shirt)
+and(verify_attr(unique(var1), pattern, striped), verify_attr(unique(var1), long_sleeved, negate))",asp_code,bert,10.0,False,v1,10.0
+122464,zephyr7B,no,asp_code,bert,10.0,False,v1,10.0
+0416338,zephyr7B_raw,"var1 = select(scene(), plate)
+and(verify_attr(unique(var1), shape, square), verify_attr(unique(var1), color, white))",asp_code,bert,10.0,False,v1,10.0
+0416338,zephyr7B,yes,asp_code,bert,10.0,False,v1,10.0
+0416235,zephyr7B_raw,"var1 = select(scene(), table)
+var2 = select(scene(), mirror)
+or(exist(negate(filter(var1, color, black), var1)), exist(negate(filter(var2, color, black), var2)))",asp_code,bert,10.0,False,v1,10.0
+0416235,zephyr7B,no,asp_code,bert,10.0,False,v1,10.0
+10734853,zephyr7B_raw,"var1 = select(scene(), food)
+query(unique(negate(filter_any(var1, burnt), var1)), name)",asp_code,bert,10.0,False,v1,10.0
+10734853,zephyr7B,tomato,asp_code,bert,10.0,False,v1,10.0
+10734851,zephyr7B_raw,"choose_attr(unique(filter_any(select(scene(), food), not(verify_attr(unique(relate(select(scene(), burnt), food, is, subject)), name))), name, sausage, bread))",asp_code,bert,10.0,False,v1,10.0
+10734851,zephyr7B,error,asp_code,bert,10.0,False,v1,10.0
+10734938,zephyr7B_raw,"var1 = select(scene(), plate)
+exist(negate(filter(var1, shape, square), var1))",asp_code,bert,10.0,False,v1,10.0
+10734938,zephyr7B,no,asp_code,bert,10.0,False,v1,10.0
+10734846,zephyr7B_raw,"query(unique(negate(filter_any(select(scene(), food), color, brown))), name)",asp_code,bert,10.0,False,v1,10.0
+10734846,zephyr7B,,asp_code,bert,10.0,False,v1,10.0
+10734924,zephyr7B_raw,"var1 = relate(select(scene(), sandwiches), plate, of, subject)
+and(verify_attr(unique(var1), shape, square), verify_attr(unique(var1), color, white))",asp_code,bert,10.0,False,v1,10.0
+10734924,zephyr7B,,asp_code,bert,10.0,False,v1,10.0
+093955,zephyr7B_raw,"var1 = select(scene(), window)
+exist(negate(filter(var1, state, open), var1))",asp_code,bert,10.0,False,v1,10.0
+093955,zephyr7B,yes,asp_code,bert,10.0,False,v1,10.0
+094032,zephyr7B_raw,"var1 = select(scene(), tire)
+and(verify_attr(unique(var1), shape, round), verify_attr(unique(var1), color, black))",asp_code,bert,10.0,False,v1,10.0
+094032,zephyr7B,yes,asp_code,bert,10.0,False,v1,10.0
+125967,zephyr7B_raw,"var1 = select(scene(), pillow)
+exist(negate(filter(var1, color, maroon), var1))",asp_code,bert,10.0,False,v1,10.0
+125967,zephyr7B,yes,asp_code,bert,10.0,False,v1,10.0
+175112,zephyr7B_raw,"verify_attr(unique(select(scene(), umbrella)), color, white)",asp_code,bert,10.0,False,v1,10.0
+175112,zephyr7B,yes,asp_code,bert,10.0,False,v1,10.0
+009909,zephyr7B_raw,"var1 = select(scene(), fence)
+exist(negate(filter(var1, material, wood), var1))",asp_code,bert,10.0,False,v1,10.0
+009909,zephyr7B,yes,asp_code,bert,10.0,False,v1,10.0
+0056568,zephyr7B_raw,"var1 = relate(select(scene(), woman), girl, to_the_right_of, subject)
+and(verify_attr(unique(var1), happiness, happy), verify_attr(unique(var1), age, old))",asp_code,bert,10.0,False,v1,10.0
+0056568,zephyr7B,no,asp_code,bert,10.0,False,v1,10.0
+078414,zephyr7B_raw,"var1 = relate(select(scene(), cat), tail, of, subject)
+and(verify_attr(unique(var1), color, orange), verify_attr(unique(var1), length, long))",asp_code,bert,10.0,False,v1,10.0
+078414,zephyr7B,yes,asp_code,bert,10.0,False,v1,10.0
+0712068,zephyr7B_raw,"var1 = select(scene(), lamp)
+and(negate(verify_attr(unique(var1), any, on)), and(verify_attr(unique(var1), color, black), verify_attr(unique(var1), material, metal)))",asp_code,bert,10.0,False,v1,10.0
+0712068,zephyr7B,no,asp_code,bert,10.0,False,v1,10.0
+0712228,zephyr7B_raw,"var1 = select(scene(), device)
+query(unique(negate(filter(var1, color, blue))), name)",asp_code,bert,10.0,False,v1,10.0
+0712228,zephyr7B,,asp_code,bert,10.0,False,v1,10.0
+0711896,zephyr7B_raw,"var1 = select(scene(), device)
+query(unique(negate(filter(var1, color, black)), name))",asp_code,bert,10.0,False,v1,10.0
+0711896,zephyr7B,,asp_code,bert,10.0,False,v1,10.0
+0473131,zephyr7B_raw,"var1 = select(scene(), hair)
+and(verify_attr(unique(var1), color, blond), verify_attr(unique(var1), length, long))",asp_code,bert,10.0,False,v1,10.0
+0473131,zephyr7B,no,asp_code,bert,10.0,False,v1,10.0
+0473000,zephyr7B_raw,"var1 = select(scene(), lid)
+and(verify_attr(unique(var1), size, large), verify_attr(unique(var1), color, black))",asp_code,bert,10.0,False,v1,10.0
+0473000,zephyr7B,no,asp_code,bert,10.0,False,v1,10.0
+1211346,zephyr7B_raw,"var1 = select(scene(), sock)
+and(verify_attr(unique(var1), color, orange), verify_attr(unique(var1), length, long))",asp_code,bert,10.0,False,v1,10.0
+1211346,zephyr7B,yes,asp_code,bert,10.0,False,v1,10.0
+1211390,zephyr7B_raw,"var1 = select(scene(), field)
+and(verify_attr(unique(var1), weather, dry), verify_attr(unique(var1), grass, true))",asp_code,bert,10.0,False,v1,10.0
+1211390,zephyr7B,no,asp_code,bert,10.0,False,v1,10.0
+0912041,zephyr7B_raw,"var1 = select(scene(), vehicle)
+query(unique(negate(filter(var1, painted, true), var1)), name)",asp_code,bert,10.0,False,v1,10.0
+0912041,zephyr7B,bus,asp_code,bert,10.0,False,v1,10.0
+0912076,zephyr7B_raw,"query(unique(filter_any(select(scene(), vehicle), not(cover))), name)",asp_code,bert,10.0,False,v1,10.0
+0912076,zephyr7B,error,asp_code,bert,10.0,False,v1,10.0
+0912167,zephyr7B_raw,"var1 = relate(select(scene(), trees), vehicle, near, subject)
+and(verify_attr(unique(var1), color, white), verify_attr(unique(var1), size, small))",asp_code,bert,10.0,False,v1,10.0
+0912167,zephyr7B,,asp_code,bert,10.0,False,v1,10.0
+0912069,zephyr7B_raw,"var1 = select(scene(), vehicle)
+choose_attr(unique(negate(filter_any(var1, parked), var1)), name)",asp_code,bert,10.0,False,v1,10.0
+0912069,zephyr7B,,asp_code,bert,10.0,False,v1,10.0
+0912084,zephyr7B_raw,"query(unique(filter(select(scene(), vehicle), negate(color, white))), name)",asp_code,bert,10.0,False,v1,10.0
+0912084,zephyr7B,,asp_code,bert,10.0,False,v1,10.0
+0912059,zephyr7B_raw,"var1 = select(scene(), vehicle)
+query(unique(negate(filter(var1, size, large), var1)), name)",asp_code,bert,10.0,False,v1,10.0
+0912059,zephyr7B,trailer,asp_code,bert,10.0,False,v1,10.0
+0912050,zephyr7B_raw,"var1 = select(scene(), vehicle)
+query(unique(negate(filter(var1, material, metallic), var1)), name)",asp_code,bert,10.0,False,v1,10.0
+0912050,zephyr7B,bus,asp_code,bert,10.0,False,v1,10.0
+0214133,zephyr7B_raw,"var1 = relate(select(scene(), speaker), device, to_the_right_of, subject)
+and(verify_attr(unique(var1), color, black), verify_attr(unique(var1), size, small))",asp_code,bert,10.0,False,v1,10.0
+0214133,zephyr7B,no,asp_code,bert,10.0,False,v1,10.0
+0213750,zephyr7B_raw,"var1 = select(scene(), laptop)
+or(var1, select(scene(), TV))",asp_code,bert,10.0,False,v1,10.0
+0213750,zephyr7B,error,asp_code,bert,10.0,False,v1,10.0
+1194029,zephyr7B_raw,"var1 = select(scene(), clothing)
+choose_attr(unique(negate(filter_any(var1, color, black), var1)), name, coat, shirt)",asp_code,bert,10.0,False,v1,10.0
+1194029,zephyr7B,coat,asp_code,bert,10.0,False,v1,10.0
+1194031,zephyr7B_raw,"var1 = select(scene(), clothing)
+query(unique(negate(filter_any(var1, black), var1)), name)",asp_code,bert,10.0,False,v1,10.0
+1194031,zephyr7B,shirt,asp_code,bert,10.0,False,v1,10.0
+0481123,zephyr7B_raw,"var1 = select(scene(), wall)
+and(verify_attr(unique(var1), color, dark), verify_attr(unique(var1), texture, rough))",asp_code,bert,10.0,False,v1,10.0
+0481123,zephyr7B,no,asp_code,bert,10.0,False,v1,10.0
+0481244,zephyr7B_raw,"query(unique(filter(select(scene(), furniture), negate(size, large))), name)",asp_code,bert,10.0,False,v1,10.0
+0481244,zephyr7B,,asp_code,bert,10.0,False,v1,10.0
+0481264,zephyr7B_raw,"verify_attr(unique(relate(select(scene(), cupboard), _, _, subject)), color, white)",asp_code,bert,10.0,False,v1,10.0
+0481264,zephyr7B,error,asp_code,bert,10.0,False,v1,10.0
+13384917,zephyr7B_raw,"var1 = relate(select(scene(), chicken_breast), bread, near, subject)
+and(verify_attr(unique(var1), color, brown), verify_attr(unique(var1), shape, curved))",asp_code,bert,10.0,False,v1,10.0
+13384917,zephyr7B,no,asp_code,bert,10.0,False,v1,10.0
+10485472,zephyr7B_raw,"query(unique(filter(select(scene(), animal), not(relate(select(scene(), bat), animal, batting, subject)))))",asp_code,bert,10.0,False,v1,10.0
+10485472,zephyr7B,error,asp_code,bert,10.0,False,v1,10.0
+10485465,zephyr7B_raw,"query(unique(filter(select(scene(), animal), negate(filter(select(scene(), person), activity, playing)))), name)",asp_code,bert,10.0,False,v1,10.0
+10485465,zephyr7B,,asp_code,bert,10.0,False,v1,10.0
+10485456,zephyr7B_raw,"query(unique(filter(select(scene(), animal), negate(color, black))), name)",asp_code,bert,10.0,False,v1,10.0
+10485456,zephyr7B,,asp_code,bert,10.0,False,v1,10.0
+10485455,zephyr7B_raw,"var1 = select(scene(), animal)
+exist(negate(filter(var1, color, black), var1), name)",asp_code,bert,10.0,False,v1,10.0
+10485455,zephyr7B,,asp_code,bert,10.0,False,v1,10.0
+0220680,zephyr7B_raw,"var1 = select(scene(), vehicle)
+and(relate(var1, tree, in_front_of, subject),)",asp_code,bert,10.0,False,v1,10.0
+0220680,zephyr7B,error,asp_code,bert,10.0,False,v1,10.0
+1419276,zephyr7B_raw,"query(unique(filter(select(scene(), dome), negate(filter(select(scene(), dome), size, little), _), _)), color)",asp_code,bert,10.0,False,v1,10.0
+1419276,zephyr7B,error,asp_code,bert,10.0,False,v1,10.0
+1419018,zephyr7B_raw,"var1 = select(scene(), shirt)
+query(unique(negate(filter_any(var1, turned_off), var1)))",asp_code,bert,10.0,False,v1,10.0
+1419018,zephyr7B,,asp_code,bert,10.0,False,v1,10.0
+1419084,zephyr7B_raw,"var1 = select(scene(), tree)
+and(verify_attr(unique(var1), height, tall), and(verify_attr(unique(var1), color, brown), verify_attr(unique(var1), thickness, thick)))",asp_code,bert,10.0,False,v1,10.0
+1419084,zephyr7B,no,asp_code,bert,10.0,False,v1,10.0
+1217392,zephyr7B_raw,,asp_code,bert,10.0,False,v1,10.0
+1217392,zephyr7B,,asp_code,bert,10.0,False,v1,10.0
+1915511,zephyr7B_raw,"var1 = select(scene(), device)
+query(unique(negate(filter(var1, color, silver), var1)), name)",asp_code,bert,10.0,False,v1,10.0
+1915511,zephyr7B,monitor,asp_code,bert,10.0,False,v1,10.0
+1915510,zephyr7B_raw,"var1 = select(scene(), device)
+query(unique(negate(filter_any(var1, color, silver), var1)), name)",asp_code,bert,10.0,False,v1,10.0
+1915510,zephyr7B,monitor,asp_code,bert,10.0,False,v1,10.0
+0925008,zephyr7B_raw,"var1 = select(scene(), nose)
+and(verify_attr(unique(var1), color, black), verify_attr(unique(var1), wetness, wet))",asp_code,bert,10.0,False,v1,10.0
+0925008,zephyr7B,no,asp_code,bert,10.0,False,v1,10.0

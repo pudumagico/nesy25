@@ -1,0 +1,13 @@
+networkx 3.2.1; BSD-3-Clause; https://github.com/networkx/networkx/blob/main/LICENSE.txt
+nltk 3.8.1; Apache v2; https://github.com/nltk/nltk/blob/develop/LICENSE.txt
+numpy 1.26.2; BSD-3-Clause(?); https://github.com/numpy/numpy/blob/main/LICENSE.txt
+pattern 3.6.0; BSD-3-Clause; https://github.com/clips/pattern/blob/master/LICENSE.txt
+clingo 5.6.2; MIT; https://github.com/potassco/clingo/blob/main/LICENSE.md
+torch 2.3.0; BSD-3-Clause(?); https://github.com/pytorch/pytorch/blob/main/LICENSE
+torchvision 0.18.0; BSD-3-Clause; https://github.com/pytorch/vision/blob/main/LICENSE
+transformers 4.36.1; Apache v2; https://github.com/huggingface/transformers/blob/main/LICENSE
+pillow 10.2.0; MIT-CMU; https://github.com/python-pillow/Pillow/blob/main/LICENSE
+pandas 2.2.0; BSD-3-Clause; https://github.com/pandas-dev/pandas/blob/main/LICENSE
+openai 0.27.8; Apache v2; https://github.com/openai/openai-python/blob/main/LICENSE
+huggingface-hub 0.20.1; Apache v2; https://github.com/huggingface/huggingface_hub/blob/main/LICENSE
+
