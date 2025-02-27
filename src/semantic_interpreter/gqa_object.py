@@ -1,4 +1,5 @@
 import networkx as nx
+from collections import defaultdict
 
 class GQAObject:
     def __init__(self, image_id, scene_json):
@@ -46,3 +47,8 @@ class GQAObject:
 
     def add_question(self, question_id, question_json):
         self.questions[question_id] = question_json
+
+
+class FakeGQAObject(defaultdict):
+            __getattr__ = dict.get
+

@@ -1,9 +1,9 @@
 from torchvision.io import read_image, ImageReadMode
 from torchvision.transforms.functional import crop, resize, pad
-from ..concept_extraction import extract_classes, extract_attributes, extract_relations
-from ..bounding_box_optimization import get_object_bboxes, get_pair_bboxes
-from ..utils import cleanup_whitespace, sanitize_asp
-from utils.blind_concept_extractor import extract_attributes_blind, extract_classes_blind, extract_relations_blind
+from gs_vqa.pipeline.concept_extraction import extract_attributes, extract_classes, extract_relations
+from gs_vqa.pipeline.bounding_box_optimization import get_object_bboxes, get_pair_bboxes
+from gs_vqa.gs_vqa_utils import cleanup_whitespace, sanitize_asp
+from .blind_concept_extractor import extract_attributes_blind, extract_classes_blind, extract_relations_blind
 import math
 import torch
 import json

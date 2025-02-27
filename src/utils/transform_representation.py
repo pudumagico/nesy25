@@ -1,4 +1,5 @@
 import re
+from gs_vqa.gs_vqa_utils import sanitize
 
 
 def extract_predicates_detailed(flat_question):
@@ -90,6 +91,7 @@ def nested_to_flat(nested_question):
     while remaining and ")" in remaining:
         firstparen = remaining.find(')')
         predicate, args = remaining[:firstparen].split('(')[-2:]
+        args = sanitize(args)
         prefix_args = []
         if "," in predicate:
             prefix_args = predicate.split(",")[:-1]
