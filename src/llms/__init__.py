@@ -1,3 +1,3 @@
 from .genericLLM import GenericLLM
-from .localmodels import HuggingFaceLLM, GPT4AllLLM
+from .localmodels import HuggingFaceLLM
 from .openaiLLM import OpenAILLM

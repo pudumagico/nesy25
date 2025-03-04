@@ -8,6 +8,7 @@ from evaluation import CSVLogger
 from prompt_tools import LLMConfig
 from gs_vqa.model.clip_model import CLIPModel
 from gs_vqa.object_detection.owl_vit_object_detector import OWLViTObjectDetector
+from semantic_interpreter import GQAObject, FakeGQAObject
 
 
 from asp_encoding import encode_question, run_clingo, encode_scene
@@ -73,9 +74,9 @@ config = LLMConfig(target_repr="asp_nested", sampling_strategy="bert", n_similar
 llm_model = OpenAILLM(version=LLM_MODEL, config=config)
 
 if __name__ == "__main__":
-    logger = CSVLogger("./logs/new_eval.csv")
+    logger = CSVLogger("./logs/test_eval.csv")
     models = [LLM_MODEL]
-    for scene_graph, qid, question in tqdm(question_iterator(500), total=500):
+    for scene_graph, qid, question in tqdm(question_iterator(500, target_set="testdev"), total=500):
         if logger.is_answered(qid, "pipeline_base"):
             continue
         scene_encoding = encode_scene(question, concept_model, object_detector)

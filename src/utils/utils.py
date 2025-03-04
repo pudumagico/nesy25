@@ -21,9 +21,9 @@ def question_iterator(n_questions=10, target_set="val", only_converging=False):
     gqa_objects = pickle.load(open(os.path.join(GQA_DATAPATH, f"{target_set}_objects.pickle"), "rb"))
     i = 0
     for obj in gqa_objects.values():
-        scene_graph = obj.scene_graph
+        scene_graph = getattr(obj, "scene_graph")
 
-        for qid, question in obj.questions.items():
+        for qid, question in getattr(obj, "questions").items():
             if only_converging:
                 q_enc = encode_question(question)
                 if flat_to_code(q_enc) == flat_to_nested(q_enc):
