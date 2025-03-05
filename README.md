@@ -75,7 +75,7 @@ Finally use utils.prepare_data to populate objects and generate in_context examp
 The relevant elements of the project are:
 - (1) utilities for encoding the scene graph and question into ASP. Perfect information refers to the ground truth scene graph. Clingo is the solver.
 - (2) utilities for evaluating the pipeline or parts thereof. The csvlogger is a convenience wrapper around the logfiles, for evaluating and comparing runs.
-- (3) the scene processing pipeline itself. Contains models for object detection (owl) and attribute/relation classification (clip). Additionally contains code to process bounding boxes and extract relevant concept from the question and perform minor input sanitization. For details see Hadl (2023)
+- (3) the scene processing pipeline itself. Contains models for object detection (owl) and attribute/relation classification (clip). Additionally contains code to process bounding boxes and extract relevant concept from the question and perform minor input sanitization. For details see attached master thesis.
 - (4) wrapper around llms used for question parsing into asp. Includes output sanitization and error handling.
 - (5) prompt templates and assembly (various in context selection and prompting strategies).
 - (6) algorithmic evaluation engine for ground truth scene graphs. Given a scene graph and semantic question representation tries to parse question as graph operations to obtain answer. Includes error classification, as both engine and gt data from GQA are imperfect.
