@@ -1,4 +1,4 @@
-from pattern.text.en import singularize
+from gs_vqa.singularize import singularize
 import re
 
 def sanitize(name):

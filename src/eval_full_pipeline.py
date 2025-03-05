@@ -74,7 +74,7 @@ config = LLMConfig(target_repr="asp_nested", sampling_strategy="bert", n_similar
 llm_model = OpenAILLM(version=LLM_MODEL, config=config)
 
 if __name__ == "__main__":
-    logger = CSVLogger("./logs/test_eval.csv")
+    logger = CSVLogger(os.path.abspath(os.path.join(__file__, "..", "..", "logs", "test_forced_eval.csv")))
     models = [LLM_MODEL]
     for scene_graph, qid, question in tqdm(question_iterator(500, target_set="testdev"), total=500):
         if logger.is_answered(qid, "pipeline_base"):
@@ -84,7 +84,6 @@ if __name__ == "__main__":
         logger.log_safe(qid, "pipeline_base", gt_answer, config=None)
         logger.log_safe(qid, "answer", question["answer"], config=None)
         for model in models:
-            
             full_name = f"pipeline_{model}"
             try:
                 if not logger.is_answered(qid, model+"_raw", config):
@@ -98,15 +97,19 @@ if __name__ == "__main__":
             except Exception as e:
                 print(e)
                 logger.log_safe(qid, full_name, "error", config=config)
-        if COMPARE_BLIND:
-            try:
-                pred_question_enc = translators[config.target_repr](logger.get_answer(qid, model+"_raw").values[0])
-                pred_answer = run_clingo(encode_scene(question, concept_model, object_detector, blind=True, question_enc=pred_question_enc), pred_question_enc, topk=TOPK)
-                logger.log_safe(qid, full_name+"_blind", pred_answer, config=config)
-            except Exception as e:
-                print(e)
-                logger.log_safe(qid, full_name+"_blind", "error", config=config)
+            if COMPARE_BLIND:
+                if logger.is_answered(qid, full_name+"_blind"):
+                    continue
+                try:
+                    pred_question_enc = translators[config.target_repr](logger.get_answer(qid, model+"_raw").values[0])
+                    
+                    pred_answer = run_clingo(encode_scene(question, concept_model, object_detector, blind=True, question_enc=pred_question_enc), pred_question_enc, topk=TOPK)
+                    logger.log_safe(qid, full_name+"_blind", pred_answer, config=config)
+                except Exception as e:
+                    print(e)
+                    logger.log_safe(qid, full_name+"_blind", "error", config=config)
         logger.save()
+    logger.score(categories=[], topk=1, use_wordnet=False)
 
             
 

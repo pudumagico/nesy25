@@ -3,6 +3,7 @@ from torchvision.transforms.functional import crop, resize, pad
 from gs_vqa.pipeline.concept_extraction import extract_attributes, extract_classes, extract_relations
 from gs_vqa.pipeline.bounding_box_optimization import get_object_bboxes, get_pair_bboxes
 from gs_vqa.gs_vqa_utils import cleanup_whitespace, sanitize_asp
+from constants import GQA_DATAPATH
 from .blind_concept_extractor import extract_attributes_blind, extract_classes_blind, extract_relations_blind
 import math
 import torch
@@ -10,12 +11,11 @@ import json
 import itertools 
 import os
 
-DATAPATH = os.path.join("c:\\", "data", "gqa")
 
-with open(os.path.join(DATAPATH, "metadata", "gqa_all_attribute.json")) as f:
+with open(os.path.join(GQA_DATAPATH, "metadata", "gqa_all_attribute.json")) as f:
     all_attributes = json.load(f)
 
-with open(os.path.join(DATAPATH, "metadata", "gqa_all_class.json")) as f:
+with open(os.path.join(GQA_DATAPATH, "metadata", "gqa_all_class.json")) as f:
     all_classes = json.load(f)
     all_child_classes = [c.replace("_", " ") for c in itertools.chain(*all_classes.values())]
 
@@ -142,7 +142,7 @@ def encode_scene(question, model, object_detector, blind=False, question_enc=Non
 
     scene_encoding += "\n"
 
-    image = read_image(os.path.join(DATAPATH, "images", f"{question['imageId']}.jpg"), ImageReadMode.RGB)
+    image = read_image(os.path.join(GQA_DATAPATH, "images", f"{question['imageId']}.jpg"), ImageReadMode.RGB)
     image_size = {'w': image.shape[2], 'h': image.shape[1]}
 
     objects = detect_objects_question_driven(image, classes, object_detector, k=k, threshold=threshold)

@@ -53,7 +53,7 @@ def write_incontext_examples(n):
 
 
 if __name__ == "__main__":
-    target = "testdev"
+    target = "val"
     # pickle.dump(populate_objects(target=target), open(os.path.join(GQA_DATAPATH, f"{target}_objects.pickle"), "wb"))
     # gqa_objects = pickle.load(open(os.path.join(GQA_DATAPATH, f"{target}_objects.pickle"), "rb"))
     # write_incontext_examples(n=1000)

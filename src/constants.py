@@ -2,8 +2,8 @@ import os
 import json
 
 API_KEY = None
-MODELPATH = os.path.join("c:\\", "models")
-DATAPATH = os.path.join("c:\\", "data")
+MODELPATH = os.path.join("/home/bileam", "models")
+DATAPATH = os.path.join("/home/bileam", "data")
 GQA_DATAPATH = os.path.join(DATAPATH, "gqa")
 VISUAL_GENOME_DATAPATH = os.path.join(DATAPATH, "visual_genome")
 CACHE_PATH = os.path.join(DATAPATH, "cache")
