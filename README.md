@@ -53,6 +53,25 @@ This project contains code for a neurosymbolic visual question answering pipelin
 Questions are translated into an answer set programming (ASP) representation, and a conditional scene graph is generated and also translated to ASP. Jointly this encoding can be used by a solver (clingo) to answer the question. 
 Correctness of an answer can be determined with variable degree of generosity, i.e. accepting synonyms or the top-k scene interpretations.
 
+Prerequisite data:
+gqa(https://cs.stanford.edu/people/dorarad/gqa/download.html):
+- images
+- questions
+- scene_graphs
+- metadata
+    - all_attributes
+    - all_class
+    - relation
+    - vocab
+    - op_map
+
+visual_genome (https://homes.cs.washington.edu/~ranjay/visualgenome/api.html):
+- attribute_synsets
+- object_synsets
+
+Finally use utils.prepare_data to populate objects and generate in_context examples as necessary.
+
+
 The relevant elements of the project are:
 - (1) utilities for encoding the scene graph and question into ASP. Perfect information refers to the ground truth scene graph. Clingo is the solver.
 - (2) utilities for evaluating the pipeline or parts thereof. The csvlogger is a convenience wrapper around the logfiles, for evaluating and comparing runs.

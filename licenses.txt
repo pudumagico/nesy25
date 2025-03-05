@@ -1,7 +1,6 @@
 networkx 3.2.1; BSD-3-Clause; https://github.com/networkx/networkx/blob/main/LICENSE.txt
 nltk 3.8.1; Apache v2; https://github.com/nltk/nltk/blob/develop/LICENSE.txt
 numpy 1.26.2; BSD-3-Clause(?); https://github.com/numpy/numpy/blob/main/LICENSE.txt
-pattern 3.6.0; BSD-3-Clause; https://github.com/clips/pattern/blob/master/LICENSE.txt
 clingo 5.6.2; MIT; https://github.com/potassco/clingo/blob/main/LICENSE.md
 torch 2.3.0; BSD-3-Clause(?); https://github.com/pytorch/pytorch/blob/main/LICENSE
 torchvision 0.18.0; BSD-3-Clause; https://github.com/pytorch/vision/blob/main/LICENSE
