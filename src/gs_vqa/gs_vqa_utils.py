@@ -1,5 +1,5 @@
-from pattern.text.en import singularize
 import re
+from .singularize import singularize
 
 def sanitize(name):
     # source: DFOL-VQA
