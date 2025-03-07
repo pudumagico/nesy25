@@ -2,7 +2,7 @@
 name = "thesis"
 version = "0.1.0"
 description = ""
-authors = ["Bileam Scheuvens <36153336+bileamScheuvens@users.noreply.github.com>"]
+authors = []
 readme = "README.md"
 
 [tool.poetry.dependencies]
