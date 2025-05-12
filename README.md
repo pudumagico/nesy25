@@ -1,4 +1,5 @@
 # Reproduction of GS-VQA with LLM Question Parsing
+[Link to the paper](https://openreview.net/forum?id=k4p44AIby6#discussion)
 
 ## Project Structure
 ```
